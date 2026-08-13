@@ -77,18 +77,18 @@ were designed to run on local CPU.
 
 ## Branch map
 
-The original experiment branches were renamed so their purpose is visible:
+The experiment branches now use purpose-driven names:
 
-| Clean branch | Former branch | Purpose |
-| --- | --- | --- |
-| main | master | Publication surface and current documentation |
-| historical/judged-baseline | orx/frozen-judged-baseline | Frozen judged artifact and environment/source provenance |
-| audit/exact-theorem-contracts | orx/exact-theorem-contracts | Exact contracts and counterexamples for Claims 1–4 |
-| audit/generalized-scaling | orx/full-generalized-scaling-proof | Generalized-scaling analysis for Claim 5 |
-| audit/figure1-reconstruction | orx/figure-1-source-reconstruction | Hash-pinned Figure 1 reconstruction and Claim 6 routes |
-| release/evaluator-candidate | orx/evaluator-visible-release-candidate | Cumulative evaluator-visible evidence package |
-| release/publication-gate | orx/publication-gate-and-canonical-release | Canonical per-claim pages and publication gate |
-| release/publication-20260728 | publication/release-20260728 | Historical publication snapshot |
+| Clean branch | Purpose |
+| --- | --- |
+| main | Publication surface and current documentation |
+| historical/judged-baseline | Frozen judged artifact and environment/source provenance |
+| audit/exact-theorem-contracts | Exact contracts and counterexamples for Claims 1–4 |
+| audit/generalized-scaling | Generalized-scaling analysis for Claim 5 |
+| audit/figure1-reconstruction | Hash-pinned Figure 1 reconstruction and Claim 6 routes |
+| release/evaluator-candidate | Cumulative evaluator-visible evidence package |
+| release/publication-gate | Canonical per-claim pages and publication gate |
+| release/publication-20260728 | Historical publication snapshot |
 
 The branch-level mapping and verification record is maintained in
 [branch-audit.md](branch-audit.md).
