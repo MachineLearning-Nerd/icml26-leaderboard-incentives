@@ -44,16 +44,16 @@ that score.
 
 The campaign grew as a single descending chain:
 
-1. `orx/frozen-judged-baseline` — locked environment and historical regression.
-2. `orx/exact-theorem-contracts` — exact claims 1–4.
-3. `orx/full-generalized-scaling-proof` — exact claim 5.
-4. `orx/figure-1-source-reconstruction` — four claim-6 routes.
-5. `orx/evaluator-visible-release-candidate` — cumulative evidence and public
+1. `historical/judged-baseline` — locked environment and historical regression.
+2. `audit/exact-theorem-contracts` — exact claims 1–4.
+3. `audit/generalized-scaling` — exact claim 5.
+4. `audit/figure1-reconstruction` — four claim-6 routes.
+5. `release/evaluator-candidate` — cumulative evidence and public
    report.
-6. `orx/publication-gate-and-canonical-release` — final immutable gate.
+6. `release/publication-gate` — final immutable gate.
 
 The winning immutable experiment branch is
-`orx/publication-gate-and-canonical-release`. Its final run is
+`release/publication-gate`. Its final run is
 `520b3579-596a-4b3f-85f6-8c2fbf0ed498` at
 `c6a0bf6f518b8b8506f75deaee14d2604179ef54`. The fixed command is:
 
@@ -84,7 +84,7 @@ regression gates pass. The exact action is a text-only Hugging Face Hub API
 commit to the existing Space
 `DineshAI/r6wfuAKmVb`, followed by a hash-verified download of that exact
 revision and a fast-forward publication of the same text paths to GitHub
-`master`. No second Space will be created.
+`main`. No second Space will be created.
 
 ## Release gates
 

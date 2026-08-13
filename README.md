@@ -1,73 +1,142 @@
-# Leaderboard Incentives — exact reproduction
+# Leaderboard Incentives — reproduction audit
 
-[![Open in molab](https://marimo.io/molab-shield.svg)](https://molab.marimo.io/github/MachineLearning-Nerd/icml26-repro-r6wfuAKmVb-leaderboard-incentives/blob/master/leaderboard_incentives_reproduction.py)
+This repository is an independent, claim-by-claim reproduction audit for
+[Leaderboard Incentives: Model Rankings under Strategic Post-Training](https://arxiv.org/abs/2603.08371).
+It is one entry in MachineLearning-Nerd’s ICML 2026 reproduction collection.
 
-We reproduced six claims from *Leaderboard Incentives: Model Rankings under
-Strategic Post-Training* ([arXiv 2603.08371](https://arxiv.org/abs/2603.08371)).
-The earlier three-player sweeps remain visible as historical toy evidence. The
-current verifier instead uses exact continuous-domain obligations.
+The paper studies benchmark design as a Stackelberg game: model developers
+strategically spend post-training effort to improve benchmark scores, while a
+benchmark designer chooses the evaluation protocol. The paper proves that
+ordinary evaluation can create unstable incentives and studies
+tune-before-test (TbT) as a protocol intended to recover model-quality
+rankings.
 
-The strongest outcome is not a numerical confirmation: claims 2–5 have
-assumption-satisfying counterexamples. Claim 1 is VERIFIED. Claims 2–5 are
-FALSIFIED under their written scope. Claim 6’s published Figure 1 endpoint
-reconstructs as **384,667.5595 → 384,668**, but the raw Winogrande measurements
-and fit parameters are absent, so the empirical claim is **BLOCKED**.
+## Paper
 
-Previous live judged score: **5/12**. Conservative forecast after publication:
-**8–10/12**. Best-supported possible score: **10/12**. These are forecasts, not
-judge results.
+- Title: Leaderboard Incentives: Model Rankings under Strategic Post-Training
+- Authors: Yatong Chen, Guanhua Zhang, and Moritz Hardt
+- Source: [arXiv:2603.08371](https://arxiv.org/abs/2603.08371)
+- Submitted: 9 March 2026
+- Associated tutorial: [leaderboard_incentives_reproduction.py](leaderboard_incentives_reproduction.py)
 
-Read the illustrated [reproduction report](reports/reproduction/report.md), the
-[complete command record](reports/reproduction/commands.md), or the
-[release report](reports/reproduction/release-report.md). The
-[self-contained marimo tutorial](leaderboard_incentives_reproduction.py)
-opens directly on the central evidence.
+The audit separates what the paper states from what the available source,
+assumptions, and evidence can establish. A falsified result means that an
+assumption-satisfying counterexample was found for the written claim. A
+blocked result means that the available paper bundle does not contain enough
+data or artifacts for an authorized independent rerun.
 
-## Claim summary
+## Reproduction status
 
-| Claim | Paper number or statement | Observed evidence | Assessment |
+The exact verifier reports Claim 1 as VERIFIED, Claims 2–5 as FALSIFIED under
+their written scope, and Claim 6 as BLOCKED. The publication artifact records
+five claims with evidence and a 10-point best-supported total, while the
+previous live judge score was 5/12. The 10-point value is an evidence-package
+forecast, not a new live-judge result.
+
+## Claim-to-evidence ledger
+
+| Claim | What the paper says | How this audit produces evidence | Result |
 | --- | --- | --- | --- |
-| 1 | pure NE generally need not exist | exact no-PNE continuous game | VERIFIED |
-| 2 | every PNE preserves capability order | `[0,3/4]` is an inverted-ranking PNE | FALSIFIED |
-| 3 | just-overtake inequality implies no PNE | `[1,1]` is a PNE with cost `0 < 0.1` | FALSIFIED |
-| 4 | TbT yields a unique stable equilibrium | two nonzero PNE persist for every TbT | FALSIFIED for aggregate uniqueness |
-| 5 | stabilizing threshold exists and is polynomial | exact generalized-logit family never stabilizes | FALSIFIED |
-| 6 | 384,668 steps at TbT 3,000 | source display gives 384,667.5595; raw fit inputs missing | BLOCKED |
+| 1 | A pure Nash equilibrium (PNE) generally need not exist. | The exact theory checker constructs an admitted continuous game and verifies that every effort profile has a profitable deviation. | VERIFIED |
+| 2 | Every PNE preserves capability order. | The checker constructs the admitted PNE [0, 3/4], where the weaker model strictly outranks the stronger one. | FALSIFIED |
+| 3 | A just-overtake inequality implies that no PNE exists. | The checker constructs the admitted PNE [1, 1] while the baseline just-overtake cost is 0 < 0.1. | FALSIFIED |
+| 4 | TbT produces a unique stable equilibrium. | Two nonzero PNE persist for every nonnegative TbT level in the permitted flat-cost example. The narrower conditional Proposition 5.3 is reported separately. | FALSIFIED for aggregate uniqueness |
+| 5 | A stabilizing threshold exists and is polynomially bounded. | An exact generalized-logit family satisfying the displayed conditions keeps the catch-up effort above 1 for every TbT level; a stricter monotone-alpha control stabilizes as expected. | FALSIFIED under the written C1–C3 scope |
+| 6 | Figure 1 implies 384,668 additional Winogrande steps at TbT 3,000. | The hashed arXiv source is downloaded and the published vector/PDF geometry reconstructs 384,667.5595, which rounds to 384,668. The raw trajectory and fit parameters are absent. | BLOCKED |
 
-All formal work used local CPU because each task was estimated at one core and
-under five minutes. No GPU was used. The claim-6 route is a source
-reconstruction, not a substitute fine-tuning run.
+The primary evidence is in
+[outputs/exact_theory.json](outputs/exact_theory.json) and
+[outputs/claim6_reconstruction.json](outputs/claim6_reconstruction.json).
+The per-claim contracts, controls, checkers, and limitations are under
+[evidence](evidence).
 
-## Experiment log
+## How to reproduce
 
-The exact command in every formal node is
-`uv run --frozen python repro/src/verify.py`.
+The fixed CPU command used by the experiment branches is:
 
-| Branch / experiment | Purpose or change | Exact run command | Assessment / outcome | Compute |
-| --- | --- | --- | --- | --- |
-| `master` | publication surface | Not run as an experiment (publication surface) | README, report, notebook, and published evidence | none |
-| [`orx/frozen-judged-baseline`](https://github.com/MachineLearning-Nerd/icml26-repro-r6wfuAKmVb-leaderboard-incentives/tree/orx/frozen-judged-baseline) | freeze judged artifact and lock environment | `uv run --frozen python repro/src/verify.py` | historical c1–c5 toy checks pass | local CPU |
-| [`orx/exact-theorem-contracts`](https://github.com/MachineLearning-Nerd/icml26-repro-r6wfuAKmVb-leaderboard-incentives/tree/orx/exact-theorem-contracts) | exact contracts for claims 1–4 | `uv run --frozen python repro/src/verify.py` | c1 VERIFIED; c2–c4 FALSIFIED | local CPU |
-| [`orx/full-generalized-scaling-proof`](https://github.com/MachineLearning-Nerd/icml26-repro-r6wfuAKmVb-leaderboard-incentives/tree/orx/full-generalized-scaling-proof) | test Proposition 5.6 over model-specific bounds | `uv run --frozen python repro/src/verify.py` | c5 FALSIFIED; cumulative checker passes | local CPU |
-| [`orx/figure-1-source-reconstruction`](https://github.com/MachineLearning-Nerd/icml26-repro-r6wfuAKmVb-leaderboard-incentives/tree/orx/figure-1-source-reconstruction) | hashed Figure 1 reconstruction and four claim-6 routes | `uv run --frozen python repro/src/verify.py` | displayed number reproduced; empirical claim BLOCKED | local CPU |
-| [`orx/evaluator-visible-release-candidate`](https://github.com/MachineLearning-Nerd/icml26-repro-r6wfuAKmVb-leaderboard-incentives/tree/orx/evaluator-visible-release-candidate) | cumulative evidence and reader-facing artifacts | `uv run --frozen python repro/src/verify.py` | all regressions, exact checks, controls, and independent checkers pass | local CPU |
-| [`orx/publication-gate-and-canonical-release`](https://github.com/MachineLearning-Nerd/icml26-repro-r6wfuAKmVb-leaderboard-incentives/tree/orx/publication-gate-and-canonical-release) | canonical per-claim pages and immutable publication gate | `uv run --frozen python repro/src/verify.py` | all regressions and exact checks pass at `c6a0bf6`; claim 6 remains BLOCKED | local CPU |
-
-## Reproduce
-
-```bash
+~~~bash
 uv sync --frozen
 uv run --frozen python repro/src/verify.py
-```
+~~~
 
-The command exits nonzero if a proof obligation, source hash, independent
-checker, or negative control fails. Raw outputs are
-[`outputs/exact_theory.json`](outputs/exact_theory.json) and
-[`outputs/claim6_reconstruction.json`](outputs/claim6_reconstruction.json).
+The verifier retains the historical finite sweeps as regression checks, then
+runs exact continuous-domain obligations, writes JSON evidence, validates that
+evidence with independent readers, downloads the hash-pinned arXiv source, and
+reconstructs Figure 1. It exits nonzero when a proof obligation, source hash,
+checker, or negative control fails.
 
-For the notebook:
+To open the self-contained marimo tutorial:
 
-```bash
+~~~bash
 uv run marimo edit leaderboard_incentives_reproduction.py
 uv run marimo run leaderboard_incentives_reproduction.py
-```
+~~~
+
+No GPU or Hugging Face compute was used. The formal and reconstruction routes
+were designed to run on local CPU.
+
+## Branch map
+
+The original experiment branches were renamed so their purpose is visible:
+
+| Clean branch | Former branch | Purpose |
+| --- | --- | --- |
+| main | master | Publication surface and current documentation |
+| historical/judged-baseline | orx/frozen-judged-baseline | Frozen judged artifact and environment/source provenance |
+| audit/exact-theorem-contracts | orx/exact-theorem-contracts | Exact contracts and counterexamples for Claims 1–4 |
+| audit/generalized-scaling | orx/full-generalized-scaling-proof | Generalized-scaling analysis for Claim 5 |
+| audit/figure1-reconstruction | orx/figure-1-source-reconstruction | Hash-pinned Figure 1 reconstruction and Claim 6 routes |
+| release/evaluator-candidate | orx/evaluator-visible-release-candidate | Cumulative evaluator-visible evidence package |
+| release/publication-gate | orx/publication-gate-and-canonical-release | Canonical per-claim pages and publication gate |
+| release/publication-20260728 | publication/release-20260728 | Historical publication snapshot |
+
+The branch-level mapping and verification record is maintained in
+[branch-audit.md](branch-audit.md).
+
+## Repository contents
+
+- [repro/src/exact_theory.py](repro/src/exact_theory.py): exact theory checks
+  for Claims 1–5.
+- [repro/src/claim6_figure.py](repro/src/claim6_figure.py): source and Figure 1
+  reconstruction for Claim 6.
+- [repro/src/check_exact_theory.py](repro/src/check_exact_theory.py) and
+  [repro/src/check_claim6.py](repro/src/check_claim6.py): independent checkers.
+- [evidence/claim_1](evidence/claim_1) through
+  [evidence/claim_6](evidence/claim_6): contracts, raw outputs, controls, and
+  limitations.
+- [reports/reproduction/report.md](reports/reproduction/report.md): illustrated
+  claim-by-claim report.
+- [reports/reproduction/release-report.md](reports/reproduction/release-report.md):
+  evaluator-facing release record.
+- [publication_gate.json](publication_gate.json): machine-readable gate result.
+- [pyproject.toml](pyproject.toml) and [uv.lock](uv.lock): pinned environment.
+
+## Citation
+
+~~~bibtex
+@article{chen2026leaderboard,
+  title         = {Leaderboard Incentives: Model Rankings under Strategic Post-Training},
+  author        = {Yatong Chen and Guanhua Zhang and Moritz Hardt},
+  journal       = {arXiv preprint arXiv:2603.08371},
+  year          = {2026},
+  doi           = {10.48550/arXiv.2603.08371}
+}
+~~~
+
+## Thank you
+
+Thank you to Yatong Chen, Guanhua Zhang, and Moritz Hardt for making the paper
+and its source available. The paper’s clear game-theoretic framing made it
+possible to turn broad claims into explicit contracts, exact counterexamples,
+controls, and reproducible evidence. This repository is an independent
+reproduction audit and is not an official artifact from the authors.
+
+## Scope and limitations
+
+This audit evaluates the written mathematical and empirical claims against the
+available arXiv source and repository artifacts. Claims 2–5 are sensitive to
+the exact assumptions; Claim 6 cannot be independently rerun without the
+authors’ Winogrande measurements, fit parameters, training code, or equivalent
+published checkpoints/logits. Please read the linked raw evidence before
+interpreting the status labels as statements about the authors’ intent or
+implementation.
