@@ -1,7 +1,7 @@
 # Exact claim audit: current candidate
 
 This page is the canonical evaluator entrypoint. The current verifier is
-`repro/src/verify.py` on branch `orx/exact-theorem-contracts`; it supersedes the
+`repro/src/verify.py` on branch `audit/exact-theorem-contracts`; it supersedes the
 finite-grid verifier retained under **Historical rejected baseline**. The fixed
 command on every experiment node is:
 
