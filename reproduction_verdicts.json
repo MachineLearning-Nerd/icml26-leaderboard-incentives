@@ -1,0 +1,50 @@
+{
+  "paper": "2603.08371v1",
+  "repository": "MachineLearning-Nerd/icml26-leaderboard-incentives",
+  "overall_status": "PARTIAL_C1_VERIFIED_C2_C3_C4_C5_FALSIFIED_C6_BLOCKED_HISTORICAL_SCORE_5_OF_12_NO_CURRENT_SCORE",
+  "claims": {
+    "C1": {
+      "status": "VERIFIED_SCOPED",
+      "raw_status": "VERIFIED",
+      "evidence": "outputs/exact_theory.json"
+    },
+    "C2": {
+      "status": "FALSIFIED_SCOPED",
+      "raw_status": "FALSIFIED",
+      "evidence": "outputs/exact_theory.json"
+    },
+    "C3": {
+      "status": "FALSIFIED_SCOPED",
+      "raw_status": "FALSIFIED",
+      "evidence": "outputs/exact_theory.json"
+    },
+    "C4": {
+      "status": "FALSIFIED_SCOPED",
+      "raw_status": "FALSIFIED",
+      "evidence": "outputs/exact_theory.json"
+    },
+    "C5": {
+      "status": "FALSIFIED_SCOPED",
+      "raw_status": "FALSIFIED",
+      "evidence": "outputs/exact_theory.json"
+    },
+    "C6": {
+      "status": "BLOCKED",
+      "raw_status": "BLOCKED",
+      "evidence": "outputs/claim6_reconstruction.json"
+    }
+  },
+  "historical_evaluation": {
+    "space": "DineshAI/r6wfuAKmVb",
+    "score": "5/12",
+    "current_score_claim": false,
+    "forecast_points": 10
+  },
+  "publication": {
+    "tests_passed": true,
+    "publication_gate_passed": true,
+    "publication_allowed": false,
+    "reason": "The dossier is public documentation of an independent audit; it does not claim author endorsement or a new live judge score.",
+    "author_endorsement_claimed": false
+  }
+}

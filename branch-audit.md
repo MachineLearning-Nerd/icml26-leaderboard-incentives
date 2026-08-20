@@ -40,7 +40,7 @@ The normalized repository must satisfy all of the following:
 1. Every published branch is one of the clean names in the mapping above.
 2. The default branch is main.
 3. Every commit author and committer is
-   MachineLearning-Nerd <37579156+MachineLearning-Nerd@users.noreply.github.com>.
+   MachineLearning-Nerd <MachineLearning-Nerd@users.noreply.github.com>.
 4. Active README, report, notebook, and tutorial links point to the renamed
    repository and clean branch names.
 5. The fixed command remains

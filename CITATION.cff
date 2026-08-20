@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If this audit or its evidence package is useful, please cite the paper and this repository."
+title: "Independent claim audit of Leaderboard Incentives"
+version: "0.1.0"
+date-released: 2026-08-20
+authors:
+  - family-names: Chen
+    given-names: Yatong
+  - family-names: Zhang
+    given-names: Guanhua
+  - family-names: Hardt
+    given-names: Moritz
+repository-code: https://github.com/MachineLearning-Nerd/icml26-leaderboard-incentives
+url: https://arxiv.org/abs/2603.08371
+doi: 10.48550/arXiv.2603.08371
+keywords:
+  - benchmark design
+  - Stackelberg games
+  - strategic post-training
+  - reproduction audit

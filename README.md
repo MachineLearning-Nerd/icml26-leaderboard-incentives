@@ -4,6 +4,13 @@ This repository is an independent, claim-by-claim reproduction audit for
 [Leaderboard Incentives: Model Rankings under Strategic Post-Training](https://arxiv.org/abs/2603.08371).
 It is one entry in MachineLearning-Nerd’s ICML 2026 reproduction collection.
 
+The standardized dossier is available in [STATUS.md](STATUS.md),
+[CLAIM_EVIDENCE.md](CLAIM_EVIDENCE.md), [SOURCE_AUDIT.md](SOURCE_AUDIT.md),
+[ENVIRONMENT.md](ENVIRONMENT.md), [REPORT.md](REPORT.md),
+[CITATION.cff](CITATION.cff), [AUTHOR_THANK_YOU.md](AUTHOR_THANK_YOU.md),
+[claims.json](claims.json), [reproduction_verdicts.json](reproduction_verdicts.json),
+and [verify_final.py](verify_final.py).
+
 The paper studies benchmark design as a Stackelberg game: model developers
 strategically spend post-training effort to improve benchmark scores, while a
 benchmark designer chooses the evaluation protocol. The paper proves that

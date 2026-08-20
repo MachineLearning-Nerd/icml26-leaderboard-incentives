@@ -1,0 +1,134 @@
+{
+  "paper": {
+    "title": "Leaderboard Incentives: Model Rankings under Strategic Post-Training",
+    "arxiv": "2603.08371v1",
+    "authors": [
+      "Yatong Chen",
+      "Guanhua Zhang",
+      "Moritz Hardt"
+    ]
+  },
+  "overall_status": "PARTIAL_C1_VERIFIED_C2_C3_C4_C5_FALSIFIED_C6_BLOCKED_HISTORICAL_SCORE_5_OF_12_NO_CURRENT_SCORE",
+  "current_score_claim": false,
+  "author_endorsement_claimed": false,
+  "claims": [
+    {
+      "id": "C1",
+      "paper_claim": "A pure Nash equilibrium generally need not exist.",
+      "status": "VERIFIED_SCOPED",
+      "possible_points": 2,
+      "source_anchor": "Assumptions 4.1–4.2 and the general nonexistence result",
+      "production_path": [
+        "repro/src/exact_theory.py constructs an admitted continuous follower game",
+        "Z3 checks an exhaustive partition of nonnegative effort pairs",
+        "repro/src/check_exact_theory.py independently reads the obligations and negative control",
+        "evidence/claim_1 records the contract, raw output, control, and limitations"
+      ],
+      "evidence": [
+        "outputs/exact_theory.json",
+        "evidence/claim_1"
+      ],
+      "boundary": "The result verifies the existential claim through the encoded continuous witness; it is not a proof that every admitted game lacks a PNE."
+    },
+    {
+      "id": "C2",
+      "paper_claim": "Every PNE preserves capability order.",
+      "status": "FALSIFIED_SCOPED",
+      "possible_points": 2,
+      "source_anchor": "Proposition 4.3 and Assumptions 4.1–4.2",
+      "production_path": [
+        "repro/src/exact_theory.py encodes cost max(e-1,0)^2, equal rewards, and efforts [0, 0.75]",
+        "Z3 checks both players' deviations, the inverted ranking, and the flat-cost condition",
+        "repro/src/check_exact_theory.py checks the linear-cost negative control",
+        "evidence/claim_2 records the assumption audit and counterexample"
+      ],
+      "evidence": [
+        "outputs/exact_theory.json",
+        "evidence/claim_2"
+      ],
+      "boundary": "The counterexample satisfies the written assumptions encoded by the audit and contradicts the universal written claim; a narrower unstated cost condition could change the result."
+    },
+    {
+      "id": "C3",
+      "paper_claim": "If the adjacent just-overtake cost is below the reward gap, no PNE exists.",
+      "status": "FALSIFIED_SCOPED",
+      "possible_points": 2,
+      "source_anchor": "Theorem 4.6 and the just-overtake condition",
+      "production_path": [
+        "repro/src/exact_theory.py constructs efforts [1,1], reward gap 0.1, and zero baseline just-overtake cost",
+        "Z3 checks both players' deviations and the written antecedent",
+        "repro/src/check_exact_theory.py checks the c(e)=e negative control",
+        "evidence/claim_3 records the exact counterexample"
+      ],
+      "evidence": [
+        "outputs/exact_theory.json",
+        "evidence/claim_3"
+      ],
+      "boundary": "The result isolates the flat-cost counterexample under the registered contract and does not infer author intent."
+    },
+    {
+      "id": "C4",
+      "paper_claim": "Tune-before-test induces a unique equilibrium ranked by latent quality, with monotone stabilization.",
+      "status": "FALSIFIED_SCOPED",
+      "possible_points": 2,
+      "source_anchor": "Proposition 5.3 and the aggregate tune-before-test discussion",
+      "production_path": [
+        "repro/src/exact_theory.py checks the two profiles [1,0] and [1,1] for every nonnegative TbT level",
+        "The exact checks also show that the all-zero profile has a profitable deviation",
+        "repro/src/check_exact_theory.py preserves the strictly increasing-cost negative control",
+        "evidence/claim_4 records why the narrower conditional proposition is not contradicted"
+      ],
+      "evidence": [
+        "outputs/exact_theory.json",
+        "evidence/claim_4"
+      ],
+      "boundary": "Aggregate uniqueness is falsified for the admitted flat-cost example; the narrower Proposition 5.3 antecedent is explicitly reported as untriggered."
+    },
+    {
+      "id": "C5",
+      "paper_claim": "Under the written generalized scaling assumptions and c(e)>=kappa*e, a stabilizing threshold exists and is O(lambda^gamma).",
+      "status": "FALSIFIED_SCOPED",
+      "possible_points": 2,
+      "source_anchor": "Proposition 5.6 and generalized scaling conditions",
+      "production_path": [
+        "repro/src/exact_theory.py constructs the exact generalized-logit family with L(theta)=theta/(1+theta)",
+        "Z3 checks the catch-up identity and the reward-versus-cost contradiction for every TbT level",
+        "The monotone-intercept control is checked separately to expose the missing condition",
+        "evidence/claim_5 records both interpretation routes and the control"
+      ],
+      "evidence": [
+        "outputs/exact_theory.json",
+        "evidence/claim_5"
+      ],
+      "boundary": "The counterexample follows the displayed C1–C3 and cost conditions; adding monotonicity of alpha would be a different contract and excludes this witness."
+    },
+    {
+      "id": "C6",
+      "paper_claim": "Figure 1 implies at least 384,668 additional Winogrande steps at common TbT 3,000.",
+      "status": "BLOCKED",
+      "possible_points": 0,
+      "source_anchor": "Figure 1 and Section 5.1",
+      "production_path": [
+        "repro/src/claim6_figure.py downloads the hash-pinned arXiv source and reconstructs the plotted endpoint",
+        "The source vector and PDF geometry produce 384667.5594951132, which rounds to 384668",
+        "Independent TeX anchors and endpoint-blind extrapolation are retained as corroborating routes",
+        "repro/src/check_claim6.py checks the reconstruction and mutated-tick negative control",
+        "evidence/claim_6 records why the raw empirical rerun remains unavailable"
+      ],
+      "evidence": [
+        "outputs/claim6_reconstruction.json",
+        "evidence/claim_6"
+      ],
+      "boundary": "Raw Winogrande measurements, fit parameters, training code, and checkpoints are absent from the audited bundle, so source-display reconstruction is not promoted to an empirical rerun."
+    }
+  ],
+  "historical_evaluation": {
+    "space": "DineshAI/r6wfuAKmVb",
+    "score": "5/12",
+    "is_current": false
+  },
+  "evidence_forecast": {
+    "best_supported_points": 10,
+    "is_live_judge_result": false
+  }
+}

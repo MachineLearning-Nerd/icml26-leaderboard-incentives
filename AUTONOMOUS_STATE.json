@@ -1,0 +1,29 @@
+{
+  "paper": "2603.08371v1",
+  "title": "Leaderboard Incentives: Model Rankings under Strategic Post-Training",
+  "repository": "MachineLearning-Nerd/icml26-leaderboard-incentives",
+  "old_repository_slug": "icml26-repro-r6wfuAKmVb-leaderboard-incentives",
+  "overall_status": "PARTIAL_C1_VERIFIED_C2_C3_C4_C5_FALSIFIED_C6_BLOCKED_HISTORICAL_SCORE_5_OF_12_NO_CURRENT_SCORE",
+  "current_score_claim": false,
+  "publication_allowed": false,
+  "author_endorsement_claimed": false,
+  "canonical_identity": {
+    "name": "MachineLearning-Nerd",
+    "email": "MachineLearning-Nerd@users.noreply.github.com"
+  },
+  "normalization": {
+    "pre_normalization_main": "436a1518299a68a5cd7000f0188bfb17875dc1d7",
+    "recovery_bundle_sha256": "a5e97e3b6b6a6983785d5aad5c9ca59195f00c357857a75debcca3b4e15c72c4",
+    "published_branch_count": 8,
+    "expected_reachable_commit_count_after_dossier": 31
+  },
+  "historical_evaluation": {
+    "space": "DineshAI/r6wfuAKmVb",
+    "score": "5/12",
+    "is_current": false
+  },
+  "evidence_forecast": {
+    "best_supported_points": 10,
+    "is_live_judge_result": false
+  }
+}
